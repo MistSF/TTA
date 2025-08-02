@@ -1,7 +1,5 @@
-back_tta/node_modules/
-back_tta/.env
 Back/node_modules/
 Back/.env
 fichiers/
 front/package-lock.json
-front_tta/package-lock.json
+front/node_modules
