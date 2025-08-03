@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-// Récupérez l'URL de base de votre API depuis les variables d'environnement
-// ou écrivez-la en dur pour commencer.
-const API_URL = 'https://tta-front.onrender.com'; // L'URL de votre backend
+const API_URL = 'https://tta-back.onrender.com';
 
 const api = axios.create({
   baseURL: API_URL
