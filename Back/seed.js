@@ -1,9 +1,17 @@
 require('dotenv').config();
 const xlsx = require('xlsx');
-const { Categorie, Specialite, Artisan } = require('./models'); 
+const sequelize = require('./config/database');
+const { Categorie, Specialite, Artisan } = require('./models'); // Ajustez le chemin si nécessaire
 
 const importData = async () => {
   try {
+    // 👇 ÉTAPE 1 : Synchroniser les modèles avec la base de données
+    // force: false signifie que les tables ne seront pas supprimées si elles existent déjà.
+    console.log('Synchronisation des modèles avec la base de données...');
+    await sequelize.sync({ force: false });
+    console.log('✅ Synchronisation terminée.');
+
+    // Le reste de votre script est identique
     const workbook = xlsx.readFile('./data/data.xlsx');
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
@@ -12,7 +20,6 @@ const importData = async () => {
     console.log(`Début de l'importation de ${data.length} artisans...`);
 
     for (const row of data) {
-      // --- 1. Récupération des données de la ligne ---
       const artisanName = row['Nom'];
       const specialiteName = row['Spécialité'];
       const categorieName = row['Catégorie'];
@@ -23,7 +30,6 @@ const importData = async () => {
       const websiteValue = row['Site Web'];
       const isTopArtisan = row['Top'];
 
-      // --- 2. Création ou recherche des entrées liées (Catégorie, Spécialité) ---
       const [category] = await Categorie.findOrCreate({
         where: { name: categorieName },
       });
@@ -56,6 +62,9 @@ const importData = async () => {
     console.log('🎉 Importation terminée !');
   } catch (error) {
     console.error('❌ Une erreur est survenue lors de l\'importation :', error);
+  } finally {
+    // C'est une bonne pratique de fermer la connexion après un script
+    await sequelize.close();
   }
 };
 
