@@ -8,7 +8,7 @@ const Categorie = sequelize.define('Categorie', {
   }
 }, {
   tableName: 'categories',
-  timestamps: false // On ne veut pas les colonnes createdAt et updatedAt
+  timestamps: false
 });
 
 module.exports = Categorie;

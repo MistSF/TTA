@@ -4,7 +4,7 @@ const { Op } = require('sequelize'); // On importe les Opérateurs pour la reche
 // Récupérer tous les artisans (avec filtres optionnels)
 exports.getAllArtisans = async (req, res) => {
   try {
-    const { category, search } = req.query; // Récupère les query params ?category=...&search=...
+    const { category, search } = req.query;
     let whereClause = {};
 
     // Si une recherche est demandée
@@ -17,7 +17,7 @@ exports.getAllArtisans = async (req, res) => {
       model: Specialite,
       include: category ? [{
         model: Categorie,
-        where: { name: category }, // Filtre par nom de catégorie
+        where: { name: category },
         required: true
       }] : [{ model: Categorie, required: true }],
       required: true
@@ -34,7 +34,7 @@ exports.getAllArtisans = async (req, res) => {
 exports.getArtisanById = async (req, res) => {
   try {
     const artisan = await Artisan.findByPk(req.params.id, {
-      include: [{ model: Specialite, include: [Categorie] }] // Inclure la spécialité et sa catégorie
+      include: [{ model: Specialite, include: [Categorie] }]
     });
     if (!artisan) {
       return res.status(404).json({ message: "Artisan non trouvé" });
@@ -65,7 +65,7 @@ exports.handleContactForm = async (req, res) => {
   const { name, email, object, message } = req.body;
   const artisanId = req.params.id;
   
-  // 1. Valider les données (important !)
+  // 1. Valider les données
   if (!name || !email || !object || !message) {
     return res.status(400).json({ message: "Tous les champs sont requis." });
   }
@@ -76,15 +76,12 @@ exports.handleContactForm = async (req, res) => {
     return res.status(404).json({ message: "Artisan non trouvé." });
   }
   
-  // 3. Envoyer l'email (ici on simule, mais c'est là qu'on utiliserait Nodemailer)
+  // 3. Envoyer l'email
   console.log(`--- NOUVEAU MESSAGE POUR ${artisan.name} (${artisan.email}) ---`);
   console.log(`De: ${name} <${email}>`);
   console.log(`Objet: ${object}`);
   console.log(`Message: ${message}`);
   console.log('----------------------------------------------------');
-  
-  // En production, vous auriez ici la logique d'envoi avec Nodemailer.
-  // transporter.sendMail(...)
 
   res.status(200).json({ message: "Votre message a bien été envoyé à l'artisan." });
 };

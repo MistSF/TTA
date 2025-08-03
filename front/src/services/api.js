@@ -11,7 +11,7 @@ const api = axios.create({
 // Intercepteur pour ajouter la clé d'API à chaque requête
 api.interceptors.request.use(config => {
   // Remplacez 'VOTRE_CLE_API_SECRETE' par la clé que vous avez définie côté backend
-  config.headers['X-API-KEY'] = 'VOTRE_CLE_API_SECRETE'; 
+  config.headers['X-API-KEY'] = process.env.REACT_APP_API_KEY;
   return config;
 });
 

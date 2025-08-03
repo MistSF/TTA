@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // --- Middlewares ---
-// Pour autoriser les requêtes cross-origin (depuis votre frontend React)
+// Pour autoriser les requêtes cross-origin
 app.use(cors()); 
 // Pour parser le JSON dans le corps des requêtes POST/PUT
 app.use(express.json()); 
@@ -24,7 +24,6 @@ async function startServer() {
   try {
     await sequelize.authenticate();
     console.log('✅ Connexion à la base de données réussie.');
-    // sequelize.sync({ alter: true }); // Attention: 'alter: true' peut modifier vos tables. Utilisez avec précaution en production.
     app.listen(PORT, () => {
       console.log(`🚀 Serveur démarré sur le port ${PORT}`);
     });

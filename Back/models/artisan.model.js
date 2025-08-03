@@ -12,7 +12,7 @@ const Artisan = sequelize.define('Artisan', {
   is_artisan_of_the_month: { type: DataTypes.BOOLEAN, defaultValue: false }
 }, {
   tableName: 'artisans',
-  timestamps: true // Peut être utile pour savoir quand une fiche a été créée/modifiée
+  timestamps: true
 });
 
 module.exports = Artisan;

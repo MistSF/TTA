@@ -1,15 +1,9 @@
 const { Categorie } = require('../models'); // On importe le modèle Categorie
 
-/**
- * Récupère toutes les catégories de la base de données.
- * @param {object} req - L'objet de la requête Express.
- * @param {object} res - L'objet de la réponse Express.
- */
 exports.getAllCategories = async (req, res) => {
   try {
-    // Utilise la méthode findAll de Sequelize pour obtenir toutes les entrées de la table des catégories
     const categories = await Categorie.findAll({
-      order: [['name', 'ASC']] // Trie les catégories par ordre alphabétique
+      order: [['name', 'ASC']]
     });
     
     // Envoie une réponse 200 OK avec la liste des catégories au format JSON
