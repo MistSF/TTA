@@ -6,9 +6,7 @@ const sequelize = require('./config/database');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({
-  origin: 'https://tta-sigma.vercel.app/'
-}));
+app.use(cors());
 app.use(express.json()); 
 
 // --- Routes ---
