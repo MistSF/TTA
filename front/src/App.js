@@ -16,7 +16,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/categorie/:categoryName" element={<ArtisanListPage />} />
-          <Route path="/search" element={<SearchResultPage />} />
           <Route path="/artisan/:id" element={<ArtisanDetailPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
