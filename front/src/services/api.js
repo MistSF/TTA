@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://tta-back.onrender.com';
+const API_URL = 'https://tta-back.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL
