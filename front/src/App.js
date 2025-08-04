@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ArtisanListPage from './pages/ArtisanListPage';
 import ArtisanDetailPage from './pages/ArtisanDetailPage';
-import SearchResultPage from './pages/SearchResultPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
