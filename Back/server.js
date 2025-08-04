@@ -8,9 +8,8 @@ const PORT = process.env.PORT || 3001;
 
 // --- Middlewares ---
 // Pour autoriser les requêtes cross-origin
-app.use(cors({
-  origin: 'https://tta-sigma.vercel.app/'
-}));
+app.use(cors());
+
 // Pour parser le JSON dans le corps des requêtes POST/PUT
 app.use(express.json()); 
 
